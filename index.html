@@ -20,7 +20,7 @@
 @media(max-width:520px){.folderGrid{grid-template-columns:1fr}.folderHeader h2{font-size:24px}}
 
 
-body{background:#f7f9fc}
+body{background:#f7f9fc;font-family:'Times New Roman', Times, serif}
 main{padding:0;background:#f7f9fc}
 .dashboardHeader{
   background:#fff;border-bottom:1px solid #dde4ec;padding:16px 22px;
@@ -166,19 +166,114 @@ main{transition:margin-left .2s ease}
 .adminUserRow{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #edf1f5;align-items:center}
 .adminUserRow small{display:block;color:#607080}
 .adminUserRow button{border:1px solid #d5dee8;background:#fff;border-radius:7px;padding:6px 9px;cursor:pointer}
-.lockedAction{opacity:.45!important;cursor:not-allowed!important}
+.lockedAction{opacity:1!important;cursor:pointer!important}
 
-</style></head><body>
+
+*{font-family:"Times New Roman", Times, serif!important}
+body{font-family:"Times New Roman", Times, serif!important}
+
+
+.headerLogo{display:none;width:54px;height:54px;border-radius:8px;object-fit:cover;border:1px solid #d6dee8;cursor:pointer}
+body.sidebar-collapsed .menuDesktop{display:none}
+body.sidebar-collapsed .headerLogo{display:block}
+@media(max-width:780px){
+  .headerLogo{width:46px;height:46px}
+}
+
+
+/* Universitet şəkli paneli */
+.universityPanel{
+  display:none;
+  background:#eef3f8;
+  border-right:1px solid #dbe3ec;
+  min-height:100vh;
+  overflow:hidden;
+}
+.universityPanel img{
+  width:100%;
+  height:100%;
+  min-height:100vh;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+}
+body.sidebar-collapsed:not(.folders-open) .app{
+  grid-template-columns:280px minmax(0,1fr)!important;
+}
+body.sidebar-collapsed:not(.folders-open) aside{
+  display:none!important;
+}
+body.sidebar-collapsed:not(.folders-open) .universityPanel{
+  display:block;
+}
+body.sidebar-collapsed.folders-open .app{
+  grid-template-columns:minmax(0,1fr)!important;
+}
+body.sidebar-collapsed.folders-open .universityPanel{
+  display:none!important;
+}
+body.folders-open .universityPanel{
+  display:none!important;
+}
+@media(max-width:780px){
+  .universityPanel{display:none!important}
+  body.sidebar-collapsed:not(.folders-open) .app{grid-template-columns:1fr!important}
+}
+
+
+.adminCreateBox{border:1px solid #dbe3ec;border-radius:10px;padding:14px;margin:14px 0;background:#f8fbff}
+.adminCreateBox h4{margin:0 0 10px;color:#0b2d4d}
+.adminCreateGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.adminCreateGrid input,.adminCreateGrid select{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid #d4dee9;border-radius:7px}
+.adminCreateActions{display:flex;justify-content:flex-end;margin-top:10px}
+@media(max-width:620px){.adminCreateGrid{grid-template-columns:1fr}}
+
+
+
+/* --- Proqram kimi əlavə et: düzəldilmiş görünüş --- */
+#closeInstallHelp{
+  min-width:100px;
+  border-radius:8px;
+  padding:10px 18px;
+}
+@media(max-width:600px){
+  .quickInstallBtn{
+    right:14px;
+    bottom:14px;
+    padding:11px 14px;
+    font-size:14px;
+  }
+  .installCard{
+    padding:18px;
+    border-radius:14px;
+  }
+  .installCard h3{font-size:22px}
+  .installCard p{font-size:15px}
+}
+
+</style>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Elektron Kargüzarlıq">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b2d4d">
+
+</head><body>
 <div class="app"><aside id="side"><div class="brand"><span style="font-size:30px">📚</span><div><b>E-Kargüzarlıq</b><div style="font-size:13px;opacity:.8">Tək fayllı versiya</div></div></div>
 <button class="navbtn active" data-folder="">🏠 Bütün sənədlər</button><div id="folderNav"></div><button class="navbtn" id="foldersBtn">📁 Papkalar</button></aside>
+<div class="universityPanel" id="universityPanel"></div>
 <main><div class="mobileHead"><button class="btn secondary" id="menuBtn">☰</button><b>Elektron Kargüzarlıq</b></div>
 <div id="docsView">
   <div class="dashboardHeader">
     <div class="headerLeft">
       <div class="menuDesktop">☰</div>
-      <div>
-        <h1 class="headerTitle">ELEKTRON KARGÜZARLIQ</h1>
-        <div class="headerSub">Sənədlərin elektron uçotu və icra nəzarəti sistemi</div>
+      
+      <div class="brandTitleWrap">
+        
+        <div>
+          <h1 class="headerTitle">ELEKTRON KARGÜZARLIQ</h1>
+          <div class="headerSub">Sənədlərin elektron uçotu və icra nəzarəti sistemi</div>
+        </div>
       </div>
     </div>
     <div class="headerRight">
@@ -204,7 +299,7 @@ main{transition:margin-left .2s ease}
     <button type="button" id="showAllBtn">📋 Bütün sənədləri göstər</button>
     <button type="button" id="openFoldersAdminBtn">📁 Papkaları aç</button>
     <button type="button" id="adminNewBtn">＋ Yeni sənəd əlavə et</button>
-    <button type="button" id="adminUsersBtn">👥 İstifadəçiləri idarə et</button>
+    <button type="button" id="adminUsersBtn">👥 İstifadəçi hüquqları</button>
     <button type="button" id="adminRefreshBtn">↻ Məlumatları yenilə</button>
     <button type="button" id="logoutBtn" style="display:none">🚪 Çıxış</button>
   </div>
@@ -278,6 +373,9 @@ main{transition:margin-left .2s ease}
       <label>Şifrə</label>
       <input id="loginPass" type="password" autocomplete="current-password">
       <div class="authMsg" id="loginMsg"></div>
+      <button type="button" id="resetAdminBtn" style="margin-top:6px;border:0;background:transparent;color:#0b66d4;cursor:pointer;padding:0">
+        Admin girişini bərpa et
+      </button>
       <div class="authActions">
         <button class="toolBtn" id="closeAuthBtn">Bağla</button>
         <button class="toolBtn primary" id="doLoginBtn">Daxil ol</button>
@@ -301,9 +399,27 @@ main{transition:margin-left .2s ease}
 </div>
 
 <div class="authModal" id="usersModal">
-  <div class="authCard" style="width:min(620px,100%)">
+  <div class="authCard" style="width:min(700px,100%)">
     <h3>İstifadəçilərin idarə edilməsi</h3>
-    <div class="muted">Administrator qeydiyyat sorğularını təsdiqləyə və düzəliş hüququ verə bilər.</div>
+    <div class="muted">Əsas administrator həm qeydiyyat sorğularını təsdiqləyə, həm də istifadəçi qeydiyyatdan keçmədən ona birbaşa hesab və hüquq yarada bilər.</div>
+
+    <div class="adminCreateBox">
+      <h4>Birbaşa istifadəçi yarat</h4>
+      <div class="adminCreateGrid">
+        <input id="adminCreateName" placeholder="Ad, soyad">
+        <input id="adminCreateUser" placeholder="İstifadəçi adı">
+        <input id="adminCreatePass" type="password" placeholder="Şifrə">
+        <select id="adminCreatePermission">
+          <option value="view">Yalnız baxış</option>
+          <option value="edit">Düzəliş hüququ</option>
+        </select>
+      </div>
+      <div class="authMsg" id="adminCreateMsg"></div>
+      <div class="adminCreateActions">
+        <button class="toolBtn primary" id="adminCreateBtn">İstifadəçi yarat</button>
+      </div>
+    </div>
+
     <div class="adminUsers" id="adminUsersList"></div>
     <div class="authActions"><button class="toolBtn" id="closeUsersBtn">Bağla</button></div>
   </div>
@@ -327,10 +443,12 @@ function folderName(id){return FOLDERS.find(f=>f.id===id)?.name||id}
 function nextReg(){let max=docs.reduce((m,d)=>Math.max(m,Number(d.id)||0),0)+1; return String(max).padStart(4,'0')+'/'+new Date().getFullYear()}
 
 function showDocsView(){
+  document.body.classList.remove('folders-open');
   document.getElementById('docsView').style.display='block';
   document.getElementById('foldersView').style.display='none';
 }
 function showFoldersView(){
+  document.body.classList.add('folders-open');
   document.getElementById('docsView').style.display='none';
   document.getElementById('foldersView').style.display='block';
   document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));
@@ -451,10 +569,20 @@ function loadUsers(){
   let users;
   try{users=JSON.parse(localStorage.getItem(AUTH_USERS_KEY)||'[]')}catch{users=[]}
   if(!Array.isArray(users)) users=[];
-  if(!users.some(u=>u.username==='admin')){
-    users.push({id:Date.now(),name:'İdarəçi',username:'admin',password:'admin123',approved:true,canEdit:true,role:'admin'});
-    localStorage.setItem(AUTH_USERS_KEY,JSON.stringify(users));
+  let admin=users.find(u=>u.username==='admin');
+  if(!admin){
+    admin={id:1,name:'Əsas admin',username:'admin',password:'admin123',approved:true,canEdit:true,role:'admin'};
+    users.unshift(admin);
+  }else{
+    admin.id=1;
+    admin.name='Əsas admin';
+    admin.username='admin';
+    admin.password='admin123';
+    admin.approved=true;
+    admin.canEdit=true;
+    admin.role='admin';
   }
+  localStorage.setItem(AUTH_USERS_KEY,JSON.stringify(users));
   return users;
 }
 function saveUsers(users){localStorage.setItem(AUTH_USERS_KEY,JSON.stringify(users))}
@@ -482,13 +610,20 @@ function updateAuthUI(){
 
   ['newBtn','editSelectedBtn','deleteSelectedBtn','adminNewBtn'].forEach(id=>{
     const el=document.getElementById(id); if(!el)return;
-    el.disabled=!editable; el.classList.toggle('lockedAction',!editable);
-    el.title=editable?'':'Düzəliş üçün administrator icazəsi lazımdır';
+    el.disabled=false;
+    el.classList.remove('lockedAction');
+    el.title=editable?'':'Kliklədikdə giriş və ya icazə yoxlanılacaq';
   });
 }
 function requireEdit(){
   if(canEdit()) return true;
-  alert('Bu əməliyyat üçün qeydiyyatdan keçmək və administrator tərəfindən düzəliş icazəsi almaq lazımdır.');
+  const u=currentUser();
+  if(!u){
+    openAuth();
+    document.getElementById('loginMsg').textContent='Düzəliş etmək üçün sistemə daxil olun.';
+    return false;
+  }
+  alert('Sizin hesabınızda düzəliş hüququ aktiv deyil. Administrator sizə “Düzəliş” və ya “Admin” hüququ verməlidir.');
   return false;
 }
 function openAuth(){
@@ -506,11 +641,24 @@ function setAuthTab(tab){
 }
 function doLogin(){
   const un=document.getElementById('loginUser').value.trim(), pw=document.getElementById('loginPass').value;
-  const u=loadUsers().find(x=>x.username===un&&x.password===pw);
   const msg=document.getElementById('loginMsg');
+
+  // Master admin login always works, even after browser data changes.
+  if(un==='admin' && pw==='admin123'){
+    const users=loadUsers();
+    const admin=users.find(x=>x.username==='admin');
+    setSession({id:admin.id});
+    msg.textContent='';
+    closeAuth();
+    updateAuthUI();
+    render();
+    return;
+  }
+
+  const u=loadUsers().find(x=>x.username===un&&x.password===pw);
   if(!u){msg.textContent='İstifadəçi adı və ya şifrə yanlışdır.';return}
   if(!u.approved){msg.textContent='Qeydiyyatınız hələ administrator tərəfindən təsdiqlənməyib.';return}
-  setSession({id:u.id}); closeAuth(); updateAuthUI(); render();
+  setSession({id:u.id}); msg.textContent=''; closeAuth(); updateAuthUI(); render();
 }
 function doRegister(){
   const name=document.getElementById('regName').value.trim(), un=document.getElementById('regUser').value.trim(), pw=document.getElementById('regPass').value;
@@ -522,25 +670,102 @@ function doRegister(){
   saveUsers(users);
   msg.style.color='#1b7a3a'; msg.textContent='Qeydiyyat sorğusu yaradıldı. Administrator təsdiqi gözlənilir.';
 }
+
+function adminCreateUser(){
+  if(!isAdmin())return;
+  const name=document.getElementById('adminCreateName').value.trim();
+  const username=document.getElementById('adminCreateUser').value.trim();
+  const password=document.getElementById('adminCreatePass').value;
+  const permission=document.getElementById('adminCreatePermission').value;
+  const msg=document.getElementById('adminCreateMsg');
+  msg.style.color='#b3261e';
+  if(!name||!username||password.length<4){
+    msg.textContent='Ad, istifadəçi adı və ən azı 4 simvolluq şifrə daxil edin.';
+    return;
+  }
+  const users=loadUsers();
+  if(users.some(u=>u.username.toLowerCase()===username.toLowerCase())){
+    msg.textContent='Bu istifadəçi adı artıq mövcuddur.';
+    return;
+  }
+  users.push({
+    id:Date.now(),
+    name,
+    username,
+    password,
+    approved:true,
+    canEdit:permission==='edit',
+    role:'user',
+    createdByAdmin:true
+  });
+  saveUsers(users);
+  document.getElementById('adminCreateName').value='';
+  document.getElementById('adminCreateUser').value='';
+  document.getElementById('adminCreatePass').value='';
+  document.getElementById('adminCreatePermission').value='view';
+  msg.style.color='#1b7a3a';
+  msg.textContent='İstifadəçi birbaşa yaradıldı və dərhal aktivdir.';
+  renderAdminUsers();
+}
+function permissionLabel(u){
+  if(u.role==='admin') return 'Admin';
+  if(u.canEdit) return 'Düzəliş';
+  return 'Baxış';
+}
+function permissionClass(u){
+  if(u.role==='admin') return 'admin';
+  if(u.canEdit) return 'edit';
+  return 'view';
+}
 function renderAdminUsers(){
   if(!isAdmin())return;
-  const users=loadUsers().filter(u=>u.role!=='admin');
+  const me=currentUser();
+  const users=loadUsers().filter(u=>!me || u.id!==me.id);
   const box=document.getElementById('adminUsersList');
   box.innerHTML=users.length?users.map(u=>`<div class="adminUserRow">
-    <div><b>${esc(u.name)}</b><small>@${esc(u.username)} · ${u.approved?'Təsdiqlənib':'Gözləyir'} · ${u.canEdit?'Düzəliş hüququ var':'Yalnız baxış'}</small></div>
     <div>
-      <button onclick="toggleApprove(${u.id})">${u.approved?'Təsdiqi ləğv et':'Təsdiqlə'}</button>
-      <button onclick="toggleEditPermission(${u.id})">${u.canEdit?'Düzəlişi bağla':'Düzəliş ver'}</button>
+      <b>${esc(u.name)}</b>
+      <small>@${esc(u.username)} · ${u.approved?'Təsdiqlənib':'Qeydiyyat gözləyir'}</small>
+      <span class="permissionStatus ${permissionClass(u)}">${permissionLabel(u)}</span>
     </div>
-  </div>`).join(''):'<div style="padding:18px 0">Qeydiyyat sorğusu yoxdur.</div>';
+    <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+      <select class="permissionSelect" onchange="setUserPermission(${u.id},this.value)">
+        <option value="view" ${u.approved && u.role!=='admin' && !u.canEdit?'selected':''}>Baxış</option>
+        <option value="edit" ${u.approved && u.role!=='admin' && u.canEdit?'selected':''}>Düzəliş</option>
+        <option value="admin" ${u.approved && u.role==='admin'?'selected':''}>Admin</option>
+      </select>
+      ${u.approved?`<button onclick="suspendUser(${u.id})">Girişi bağla</button>`:`<button onclick="approveAsView(${u.id})">Təsdiqlə</button>`}
+    </div>
+  </div>`).join(''):'<div style="padding:18px 0">Başqa istifadəçi yoxdur.</div>';
 }
-function toggleApprove(id){
+function setUserPermission(id,permission){
+  if(!isAdmin()) return;
   const users=loadUsers(),u=users.find(x=>x.id===id); if(!u)return;
-  u.approved=!u.approved; if(!u.approved)u.canEdit=false; saveUsers(users); renderAdminUsers();
+  u.approved=true;
+  if(permission==='admin'){
+    u.role='admin'; u.canEdit=true;
+  }else if(permission==='edit'){
+    u.role='user'; u.canEdit=true;
+  }else{
+    u.role='user'; u.canEdit=false;
+  }
+  saveUsers(users);
+  renderAdminUsers();
+  updateAuthUI();
 }
-function toggleEditPermission(id){
+function approveAsView(id){
+  if(!isAdmin()) return;
   const users=loadUsers(),u=users.find(x=>x.id===id); if(!u)return;
-  if(!u.approved){alert('Əvvəl istifadəçini təsdiqləyin.');return}
+  u.approved=true; u.role='user'; u.canEdit=false;
+  saveUsers(users); renderAdminUsers();
+}
+function suspendUser(id){
+  if(!isAdmin()) return;
+  const users=loadUsers(),u=users.find(x=>x.id===id); if(!u)return;
+  if(!confirm(`${u.name} üçün sistemə giriş bağlansın?`)) return;
+  u.approved=false; u.role='user'; u.canEdit=false;
+  saveUsers(users); renderAdminUsers();
+}
   u.canEdit=!u.canEdit; saveUsers(users); renderAdminUsers();
 }
 
@@ -561,6 +786,7 @@ document.getElementById('filterBtn').onclick=()=>{dashboardFilter='all';currentF
 document.getElementById('selectAll').onchange=e=>{document.querySelectorAll('.rowCheck').forEach(ch=>{ch.checked=e.target.checked;ch.closest('tr').classList.toggle('selected',ch.checked)})};
 document.getElementById('menuBtn').onclick=()=>document.getElementById('side').classList.toggle('open');
 document.querySelector('.menuDesktop').onclick=()=>document.body.classList.toggle('sidebar-collapsed');
+document.getElementById('headerLogo').onclick=()=>document.body.classList.remove('sidebar-collapsed');
 document.querySelectorAll('.statCard[data-stat]').forEach(card=>{
   card.onclick=()=>{dashboardFilter=card.dataset.stat; currentFolder=''; showDocsView(); render();};
 });
@@ -574,11 +800,22 @@ document.getElementById('loginMenuBtn').onclick=()=>{userMenu.classList.remove('
 document.getElementById('logoutBtn').onclick=()=>{setSession(null);userMenu.classList.remove('open');updateAuthUI();render()};
 document.getElementById('adminUsersBtn').onclick=()=>{if(!isAdmin())return;userMenu.classList.remove('open');renderAdminUsers();document.getElementById('usersModal').classList.add('open')};
 document.getElementById('closeUsersBtn').onclick=()=>document.getElementById('usersModal').classList.remove('open');
+document.getElementById('adminCreateBtn').onclick=adminCreateUser;
 document.getElementById('loginTab').onclick=()=>setAuthTab('login');
 document.getElementById('registerTab').onclick=()=>setAuthTab('register');
 document.getElementById('closeAuthBtn').onclick=closeAuth;
 document.getElementById('closeAuthBtn2').onclick=closeAuth;
 document.getElementById('doLoginBtn').onclick=doLogin;
+document.getElementById('resetAdminBtn').onclick=()=>{
+  const users=loadUsers().filter(u=>u.username!=='admin');
+  users.unshift({id:1,name:'Əsas admin',username:'admin',password:'admin123',approved:true,canEdit:true,role:'admin'});
+  saveUsers(users);
+  setSession(null);
+  document.getElementById('loginUser').value='admin';
+  document.getElementById('loginPass').value='admin123';
+  document.getElementById('loginMsg').style.color='#1b7a3a';
+  document.getElementById('loginMsg').textContent='Admin girişi bərpa edildi. “Daxil ol” düyməsini basın.';
+};
 document.getElementById('doRegisterBtn').onclick=doRegister;
 document.getElementById('authModal').onclick=e=>{if(e.target.id==='authModal')closeAuth()};
 document.getElementById('usersModal').onclick=e=>{if(e.target.id==='usersModal')document.getElementById('usersModal').classList.remove('open')};
@@ -601,4 +838,7 @@ document.getElementById('weekdayText').textContent=days[now.getDay()];
 
 renderNav(); document.getElementById('foldersBtn').onclick=showFoldersView; renderFolderGrid();updateAuthUI();
 render();
-</script></body></html>
+</script>
+</div>
+
+</body></html>
